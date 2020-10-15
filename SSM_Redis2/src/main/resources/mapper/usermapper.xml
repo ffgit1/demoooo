@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 用来定位具体是哪一个mapper文件的东西，不能与其他mapper的namespace重复 -->
+<mapper namespace="com.zhiyou.dao.UserDao">
+	<!-- <mapper namespace="usermapping"> -->
+	<!-- id 用来配合namespace来定位sql语句的，在同一个mapper中不能重复 resultType 用来指定查询语句的结果集类型，如果查询出来时多条记录，它会自动包装为对应的list集合，要求model 
+		的属性名要与数据库的列名一致(同名匹配原则)，如果不一致，不会报错，但不会有值。 resultMap 当数据库列名与Model的属性名不一致的时候，查询语句可以使用resultMap来自定义返回结果集，在其指定的数据库中列对应与Model 
+		中的属性名 parameterType 用来指定当前sql中需要使用的参数类型，如果传入的是model，在sql中就可以使用#{属性名}来进行取值的操作， 
+		如果传入的是一个字符串货基本数据类型，可以使用#{任意字符}来进行取值，一般情况下，我们可以默认省略掉参数类型，但是开发之中 建议不要省略。 -->
+	<insert id="add" parameterType="user">
+		insert into user
+		values(#{id},#{name},#{password},#{money},#{date});
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from user where
+		id=#{idadfa};
+	</delete>
+	<update id="update" parameterType="user">
+		update user set
+		username=#{name},password=#{password},money=#{money},date=#{date}
+		where
+		id=#{id};
+	</update>
+
+	<resultMap type="user" id="userMap">
+		<id column="id" property="id" />
+		<result column="username" property="name" />
+		<result column="password" property="password" />
+		<result column="money" property="money" />
+		<result column="date" property="date" />
+	</resultMap>
+
+	<select id="select" resultMap="userMap">
+		select * from user
+	</select>
+	<select id="selectById" resultMap="userMap">
+		select * from user where id=#{id};
+	</select>
+
+</mapper>
