@@ -47,7 +47,7 @@ public class UserController {
 	}
 	@RequestMapping("update")
 	public String delete(User user,HttpServletRequest request, HttpServletResponse response){
-		userService.update(user);;
+		userService.update(user);
 		return "forward:show";
 	}
 }
